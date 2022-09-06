@@ -1,1 +1,1 @@
-# formula-one-quiz
+# Formula One Quiz

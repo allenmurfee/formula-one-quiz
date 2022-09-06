@@ -1,8 +1,12 @@
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
-var intro = document.querySelector("intro");
-var submitButton = document.querySelector("submit");
-var nextButton = document.querySelector("next");
+var intro = document.getElementById("intro");
+var submitButton = document.getElementById("submit");
+var nextButton = document.getElementById("next");
+var c1 = document.getElementById("c1");
+var c2 = document.getElementById("c2");
+var c3 = document.getElementById("c3");
+var c4 = document.getElementById("c4");
 
 timerCount = 60;
 var score = 0;
@@ -61,24 +65,34 @@ var questions = [
   },
 ];
 
+submitButton.style.display = "none";
+nextButton.style.display = "none";
+c1.style.display = "none";
+c2.style.display = "none";
+c3.style.display = "none";
+c4.style.display = "none";
+
+//Start Quiz
 function startQuiz() {
+  submitButton.style.display = "";
+  nextButton.style.display = "";
+  c1.style.display = "";
+  c2.style.display = "";
+  c3.style.display = "";
+  c4.style.display = "";
   startTimer();
-  cycle("0");
-  intro.textContent.style.display = "none";
+  cycle(0);
 }
 
 startButton.addEventListener("click", startQuiz);
 
+//Function to display questions one at a time
 function cycle(id) {
   // Need to get result
   console.log(id);
+
   var questionSection = document.getElementById("question");
   questionSection.textContent = questions[id].q;
-
-  var c1 = document.getElementById("c1");
-  var c2 = document.getElementById("c2");
-  var c3 = document.getElementById("c3");
-  var c4 = document.getElementById("c4");
 
   c1.textContent = questions[id].c[0].text;
   c2.textContent = questions[id].c[1].text;
@@ -106,14 +120,30 @@ function cycle(id) {
   });
 
   //Evalutating answer selection
-  submitButton[id].addEventListener("click", function () {
-    if (selectedC === isCorrect) {
+  submitButton.addEventListener("click", function () {
+    if (selectedC === true) {
       score++;
+      console.log(score);
       document.getElementById("result").textContent = "Correct!";
     } else {
       score--;
       timerCount--;
       document.getElementById("result").textContent = "Incorrect.";
+    }
+  });
+
+  document.getElementById("result").textContent = "";
+
+  nextButton.addEventListener("click", function () {
+    if (id < 4) {
+      id++;
+      cycle(id);
+      console.log(id);
+    } else {
+      intro.textContent = "Results";
+      document.getElementById("question-container").textContent = "";
+      submitButton.style.display = "none";
+      nextButton.style.display = "none";
     }
   });
 }
@@ -129,10 +159,10 @@ function startTimer() {
   }
 }
 
-submitButton.addEventListener("click", function () {
-  if (id < 3) {
-    id++;
-    cycle(id);
-    console.log(id);
-  }
-});
+// nextButton.addEventListener("click", function () {
+//   if (questions.id < 3) {
+//     questions.id++;
+//     cycle(questions.id);
+//     console.log(questions.id);
+//   }
+// });
