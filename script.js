@@ -89,7 +89,6 @@ startButton.addEventListener("click", startQuiz);
 //Function to display questions one at a time
 function cycle(id) {
   // Need to get result
-  console.log(id);
 
   var questionSection = document.getElementById("question");
   questionSection.textContent = questions[id].q;
@@ -121,7 +120,7 @@ function cycle(id) {
 
   //Evalutating answer selection
   submitButton.addEventListener("click", function () {
-    if (selectedC === true) {
+    if (selectedC = true) {
       score++;
       console.log(score);
       document.getElementById("result").textContent = "Correct!";
@@ -158,6 +157,7 @@ function startTimer() {
     return alert("Time is up!");
   }
 }
+
 
 // nextButton.addEventListener("click", function () {
 //   if (questions.id < 3) {
