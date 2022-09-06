@@ -8,7 +8,7 @@ var c2 = document.getElementById("c2");
 var c3 = document.getElementById("c3");
 var c4 = document.getElementById("c4");
 
-timerCount = 60;
+var timerCount = 60;
 var score = 0;
 
 //Quiz questions
@@ -103,7 +103,7 @@ function cycle(id) {
   c3.value = questions[id].c[2].isCorrect;
   c4.value = questions[id].c[3].isCorrect;
 
-  var selectedC = "";
+  var selectedC = " ";
 
   c1.addEventListener("click", function () {
     selectedC = c1.value;
@@ -117,16 +117,17 @@ function cycle(id) {
   c4.addEventListener("click", function () {
     selectedC = c4.value;
   });
+  console.log(selectedC);
 
   //Evalutating answer selection
   submitButton.addEventListener("click", function () {
-    if (selectedC = true) {
+    if ((selectedC = true)) {
       score++;
       console.log(score);
       document.getElementById("result").textContent = "Correct!";
     } else {
       score--;
-      timerCount--;
+      timerCount - 5;
       document.getElementById("result").textContent = "Incorrect.";
     }
   });
@@ -157,12 +158,3 @@ function startTimer() {
     return alert("Time is up!");
   }
 }
-
-
-// nextButton.addEventListener("click", function () {
-//   if (questions.id < 3) {
-//     questions.id++;
-//     cycle(questions.id);
-//     console.log(questions.id);
-//   }
-// });
