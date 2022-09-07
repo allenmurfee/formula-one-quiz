@@ -41,22 +41,14 @@ var questions = [
   {
     id: 3,
     q: "Which team did Carlos Sainz drive for before Ferrari?",
-    c: [
-      { text: "Racing Point", isCorrect: false },
-      { text: "Alpine", isCorrect: false },
-      { text: "McLaren", isCorrect: true },
-      { text: "Alfa Romeo", isCorrect: false },
-    ],
+    c: ["Racing Point", "Alpine", "McLaren", "Alfa Romeo"],
+    a: "McLaren",
   },
   {
     id: 4,
     q: "Which of these F1 drivers is of Dutch descent?",
-    c: [
-      { text: "Max Verstappen", isCorrect: true },
-      { text: "Lando Norris", isCorrect: false },
-      { text: "Valtteri Bottas", isCorrect: false },
-      { text: "Esteban Ocon", isCorrect: false },
-    ],
+    c: ["Max Verstappen", "Lando Norris", "Valtteri Bottas", "Esteban Ocon"],
+    a: "Max Verstappen",
   },
 ];
 
@@ -95,11 +87,11 @@ function cycle(id) {
 
   //use "this" keyword to create a function that covers all buttons
 
-  questionContainer.addEventListener("click", function(event) {
+  questionContainer.addEventListener("click", function (event) {
     // selectedC = c1.value;
     // selectedC = this.value;
 
-    var [clicked, correctAns] = [event.target, questions[id].a]
+    var [clicked, correctAns] = [event.target, questions[id].a];
     console.log(clicked);
     console.log(correctAns);
 
