@@ -3,6 +3,7 @@ var startButton = document.getElementById("start-button");
 var intro = document.getElementById("intro");
 var submitButton = document.getElementById("submit");
 var nextButton = document.getElementById("next");
+var questionContainer = document.getElementById("question-container");
 var c1 = document.getElementById("c1");
 var c2 = document.getElementById("c2");
 var c3 = document.getElementById("c3");
@@ -10,6 +11,7 @@ var c4 = document.getElementById("c4");
 
 var timerCount = 60;
 var score = 0;
+var selectedC = "";
 
 //Quiz questions
 var questions = [
@@ -17,31 +19,24 @@ var questions = [
     id: 0,
     q: "Which driver has won 7 world championships?",
     c: [
-      { text: "Lewis Hamilton", isCorrect: true },
-      { text: "Max Verstappen", isCorrect: false },
-      { text: "Fernando Alonso", isCorrect: false },
-      { text: "Daniel Riccardio", isCorrect: false },
+      "Lewis Hamilton",
+      "Max Verstappen",
+      "Fernando Alonso",
+      "Daniel Riccardio",
     ],
+    a: "Lewis Hamilton",
   },
   {
     id: 1,
     q: "What is the first name of legendary F1 driver Michael Schumacher's son who races for Haas in 2022?",
-    c: [
-      { text: "Mack", isCorrect: false },
-      { text: "Mick", isCorrect: true },
-      { text: "Mitch", isCorrect: false },
-      { text: "Mark", isCorrect: false },
-    ],
+    c: ["Mick", "Mack", "Mitch", "Mark"],
+    a: "Mick",
   },
   {
     id: 2,
     q: "In 2022, what manufacturer provides Red Bull's engine?",
-    c: [
-      { text: "Ferrari", isCorrect: false },
-      { text: "Renault", isCorrect: false },
-      { text: "Mercedes", isCorrect: false },
-      { text: "Honda", isCorrect: true },
-    ],
+    c: ["Ferrari", "Renault", "Mercedes", "Honda"],
+    a: "Honda",
   },
   {
     id: 3,
@@ -65,8 +60,8 @@ var questions = [
   },
 ];
 
-submitButton.style.display = "none";
-nextButton.style.display = "none";
+// submitButton.style.display = "none";
+// nextButton.style.display = "none";
 c1.style.display = "none";
 c2.style.display = "none";
 c3.style.display = "none";
@@ -74,8 +69,8 @@ c4.style.display = "none";
 
 //Start Quiz
 function startQuiz() {
-  submitButton.style.display = "";
-  nextButton.style.display = "";
+  // submitButton.style.display = "";
+  // nextButton.style.display = "";
   c1.style.display = "";
   c2.style.display = "";
   c3.style.display = "";
@@ -93,59 +88,86 @@ function cycle(id) {
   var questionSection = document.getElementById("question");
   questionSection.textContent = questions[id].q;
 
-  c1.textContent = questions[id].c[0].text;
-  c2.textContent = questions[id].c[1].text;
-  c3.textContent = questions[id].c[2].text;
-  c4.textContent = questions[id].c[3].text;
+  c1.textContent = questions[id].c[0];
+  c2.textContent = questions[id].c[1];
+  c3.textContent = questions[id].c[2];
+  c4.textContent = questions[id].c[3];
 
-  c1.value = questions[id].c[0].isCorrect;
-  c2.value = questions[id].c[1].isCorrect;
-  c3.value = questions[id].c[2].isCorrect;
-  c4.value = questions[id].c[3].isCorrect;
+  //use "this" keyword to create a function that covers all buttons
 
-  var selectedC = " ";
+  questionContainer.addEventListener("click", function(event) {
+    // selectedC = c1.value;
+    // selectedC = this.value;
 
-  c1.addEventListener("click", function () {
-    selectedC = c1.value;
-  });
-  c2.addEventListener("click", function () {
-    selectedC = c2.value;
-  });
-  c3.addEventListener("click", function () {
-    selectedC = c3.value;
-  });
-  c4.addEventListener("click", function () {
-    selectedC = c4.value;
-  });
-  console.log(selectedC);
+    var [clicked, correctAns] = [event.target, questions[id].a]
+    console.log(clicked);
+    console.log(correctAns);
 
-  //Evalutating answer selection
-  submitButton.addEventListener("click", function () {
-    if ((selectedC = true)) {
+    if (clicked === correctAns) {
       score++;
       console.log(score);
       document.getElementById("result").textContent = "Correct!";
     } else {
-      score--;
-      timerCount - 5;
       document.getElementById("result").textContent = "Incorrect.";
+      timerCount - 5;
+      score--;
     }
-  });
 
-  document.getElementById("result").textContent = "";
-
-  nextButton.addEventListener("click", function () {
     if (id < 4) {
       id++;
       cycle(id);
-      console.log(id);
     } else {
       intro.textContent = "Results";
       document.getElementById("question-container").textContent = "";
-      submitButton.style.display = "none";
-      nextButton.style.display = "none";
+      // intro.textContent = "Results";
+      // document.getElementById("question-container").textContent = "";
+      // submitButton.style.display = "none";
+      // nextButton.style.display = "none";
     }
   });
+
+  // c2.addEventListener("click", function () {
+  //   selectedC = c2.value;
+
+  // });
+  // c3.addEventListener("click", function () {
+  //   selectedC = c3.value;
+
+  // });
+  // c4.addEventListener("click", function () {
+  //   selectedC = c4.value;
+
+  // });
+
+  //Evalutating answer selection
+  // submitButton.addEventListener("click", function () {
+  //   console.log(selectedC)
+  //   if (selectedC == "true") {
+  //     score++;
+  //     console.log(score);
+  //     document.getElementById("result").textContent = "Correct!";
+  //   } else {
+  //     score--;
+  //     timerCount - 5;
+  //     document.getElementById("result").textContent = "Incorrect.";
+  //   }
+  // });
+
+  // //Goes to next question until the last question
+  // nextButton.addEventListener("click", function () {
+  //   if (id < 4) {
+  //     id++;
+  //     cycle(id);
+  //   } else {
+  //     intro.textContent = "Results";
+  //     document.getElementById("question-container").textContent = "";
+  //     submitButton.style.display = "none";
+  //     nextButton.style.display = "none";
+  //   }
+  // });
+
+  // Clears Correct or Incorrect for each new question
+  document.getElementById("result").textContent = "";
 }
 
 //Timer function
