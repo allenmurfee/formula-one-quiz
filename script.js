@@ -92,10 +92,10 @@ function cycle(id) {
     // selectedC = this.value;
 
     var [clicked, correctAns] = [event.target, questions[id].a];
-    console.log(clicked);
+    console.log(clicked.textContent);
     console.log(correctAns);
 
-    if (clicked === correctAns) {
+    if (clicked.textContent === correctAns) {
       score++;
       console.log(score);
       document.getElementById("result").textContent = "Correct!";
@@ -109,7 +109,7 @@ function cycle(id) {
       id++;
       cycle(id);
     } else {
-      intro.textContent = "Results";
+      intro.textContent = "Score:" + score;
       document.getElementById("question-container").textContent = "";
       // intro.textContent = "Results";
       // document.getElementById("question-container").textContent = "";
@@ -159,7 +159,7 @@ function cycle(id) {
   // });
 
   // Clears Correct or Incorrect for each new question
-  document.getElementById("result").textContent = "";
+  // document.getElementById("result").textContent = "";
 }
 
 //Timer function
