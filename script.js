@@ -70,22 +70,21 @@ function startQuiz() {
 startButton.addEventListener("click", startQuiz);
 // questionContainer.addEventListener("click", idk)
 
-timerEl.textContent = timerCount;
-
 //Timer function
 function startTimer() {
+  // var timerCountNum = parseInt(timerCount);
+  timerEl.textContent = timerCount;
+  console.log(timerEl.textContent);
+  console.log(timerCount);
   var timer = setInterval(function () {
     // timerEl.textContent = timerCount;
-    timerCount--;
+    timerEl.textContent--;
+    if (timerEl.textContent == "0") {
+      console.log("done");
+      clearInterval(timer);
+      showResults();
+    }
   }, 1000);
-
-  var timerCountNum = parseInt(timerCount);
-
-  if (timerCountNum === 0) {
-    clearInterval(timer);
-    showResults();
-    console.log("done");
-  }
 }
 
 //Function to display questions one at a time
@@ -111,7 +110,7 @@ questionContainer.addEventListener("click", function (event) {
   } else {
     document.getElementById("result").textContent = "Incorrect.";
     score--;
-    timerCount.textContent = timerCount - 5;
+    timerEl.textContent = timerEl.textContent - 5;
   }
 
   nextQ();
