@@ -70,14 +70,21 @@ function startQuiz() {
 startButton.addEventListener("click", startQuiz);
 // questionContainer.addEventListener("click", idk)
 
+timerEl.textContent = timerCount;
+
 //Timer function
 function startTimer() {
   var timer = setInterval(function () {
-    timerEl.textContent = timerCount;
+    // timerEl.textContent = timerCount;
     timerCount--;
   }, 1000);
-  if (timerCount === 0) {
-    return alert("Time is up!");
+
+  var timerCountNum = parseInt(timerCount);
+
+  if (timerCountNum === 0) {
+    clearInterval(timer);
+    showResults();
+    console.log("done");
   }
 }
 
@@ -94,8 +101,8 @@ function cycle(qIndex) {
 
 questionContainer.addEventListener("click", function (event) {
   var [clicked, correctAns] = [event.target, questions[qIndex].a];
-  console.log(clicked.textContent);
-  console.log(correctAns);
+  // console.log(clicked.textContent);
+  // console.log(correctAns);
 
   if (clicked.textContent === correctAns) {
     score++;
@@ -103,13 +110,12 @@ questionContainer.addEventListener("click", function (event) {
     document.getElementById("result").textContent = "Correct!";
   } else {
     document.getElementById("result").textContent = "Incorrect.";
-    timerCount - 5;
     score--;
+    timerCount.textContent = timerCount - 5;
   }
 
   nextQ();
 });
-
 
 function nextQ() {
   var endGame = questions.length - 1;
