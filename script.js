@@ -1,3 +1,4 @@
+//Variables
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
 var intro = document.getElementById("intro");
@@ -10,7 +11,6 @@ var c1 = document.getElementById("c1");
 var c2 = document.getElementById("c2");
 var c3 = document.getElementById("c3");
 var c4 = document.getElementById("c4");
-
 var timerCount = 60;
 var score = 0;
 var qIndex = 0;
@@ -54,6 +54,7 @@ var questions = [
   },
 ];
 
+//Hiding content on initial page load
 c1.style.display = "none";
 c2.style.display = "none";
 c3.style.display = "none";
@@ -63,7 +64,7 @@ document.getElementById("enter").style.display = "none";
 initialsButton.style.display = "none";
 document.getElementById("clear").style.display = "none";
 
-//Start Quiz
+//Start Quiz function
 function startQuiz() {
   c1.style.display = "";
   c2.style.display = "";
@@ -73,17 +74,16 @@ function startQuiz() {
   cycle(0);
 }
 
+//Starts quiz on click
 startButton.addEventListener("click", startQuiz);
 // questionContainer.addEventListener("click", idk)
 
 //Timer function
 function startTimer() {
-  // var timerCountNum = parseInt(timerCount);
   timerEl.textContent = timerCount;
   console.log(timerEl.textContent);
   console.log(timerCount);
   var timer = setInterval(function () {
-    // timerEl.textContent = timerCount;
     timerEl.textContent--;
     if (timerEl.textContent == "0") {
       clearInterval(timer);
@@ -103,10 +103,9 @@ function cycle(qIndex) {
   c4.textContent = questions[qIndex].c[3];
 }
 
+//Function that compares question choice selection to answer
 questionContainer.addEventListener("click", function (event) {
   var [clicked, correctAns] = [event.target, questions[qIndex].a];
-  // console.log(clicked.textContent);
-  // console.log(correctAns);
 
   if (clicked.textContent === correctAns) {
     score++;
@@ -121,6 +120,7 @@ questionContainer.addEventListener("click", function (event) {
   nextQ();
 });
 
+//Function that displays next question until all questions have been answered
 function nextQ() {
   var endGame = questions.length - 1;
   if (endGame === qIndex) {
@@ -131,18 +131,20 @@ function nextQ() {
   }
 }
 
+//Doesn't reload page after initials form submission
 initialsButton.addEventListener("click", function (event) {
   event.preventDefault();
 });
 
+//Funciton that shows score at the end of the quiz
 function showResults() {
-  // event.preventDefault();
   intro.textContent = "Score:" + score;
   questionContainer.textContent = "";
   document.getElementById("result").textContent = "";
   enterData();
 }
 
+//Function that stores initials in local storage
 function enterData() {
   document.getElementById("enter").style.display = "";
   initialsButton.style.display = "";
@@ -156,6 +158,7 @@ function enterData() {
   });
 }
 
+//Function that shows initals and high score
 function showData() {
   document.getElementById("clear").style.display = "";
   var initials = localStorage.getItem("initalsData");
@@ -163,7 +166,9 @@ function showData() {
   document.getElementById("clear").addEventListener("click", function () {
     localStorage.clear();
     scoresSection.textContent = "";
+    document.getElementById("clear").style.display = "none";
   });
 }
 
+//Calls showData function on button click
 highscoresButton.addEventListener("click", showData);
