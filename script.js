@@ -3,8 +3,9 @@ var startButton = document.getElementById("start-button");
 var intro = document.getElementById("intro");
 var submitButton = document.getElementById("submit");
 var nextButton = document.getElementById("next");
+var initialsButton = document.getElementById("initialsButton");
 var questionContainer = document.getElementById("question-container");
-var initialsEl = document.getElementById("initials").value;
+var initialsEl = document.getElementById("initials");
 var c1 = document.getElementById("c1");
 var c2 = document.getElementById("c2");
 var c3 = document.getElementById("c3");
@@ -58,8 +59,10 @@ c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
 document.getElementById("initials").style.display = "none";
+document.getElementById("enter").style.display = "none";
+initialsButton.style.display = "none";
 
-// var initials = localStorage.getItem("initials");
+var initials = localStorage.getItem("initials");
 
 //Start Quiz
 function startQuiz() {
@@ -84,7 +87,6 @@ function startTimer() {
     // timerEl.textContent = timerCount;
     timerEl.textContent--;
     if (timerEl.textContent == "0") {
-      console.log("done");
       clearInterval(timer);
       showResults();
     }
@@ -130,13 +132,28 @@ function nextQ() {
   }
 }
 
+initialsButton.addEventListener("click", function (event) {
+  event.preventDefault();
+});
+
 function showResults() {
   // event.preventDefault();
   intro.textContent = "Score:" + score;
   questionContainer.textContent = "";
   document.getElementById("result").textContent = "";
-  document.getElementById("initials").style.display = "";
-  localStorage.setItem("initials", initialsEl);
+  enterData();
 }
 
-console.log(initialsEl)
+function enterData() {
+  document.getElementById("enter").style.display = "";
+  initialsButton.style.display = "";
+  document.getElementById("initials").style.display = "";
+
+  initialsButton.addEventListener("click", function () {
+    localStorage.setItem("initalsData", initialsEl.value);
+  });
+}
+
+function showData() {
+  localStorage.getItem("initalsData");
+}
