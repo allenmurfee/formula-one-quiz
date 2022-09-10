@@ -147,23 +147,33 @@ function showResults() {
 }
 
 //Variable holds more than one localStorage value
+function saveScore() {
+  var initials = initialsEl.value;
+  var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
 
-var final = [];
+  var entry = {
+    score: score,
+    initials: initials,
+  };
+
+  highscores.push(entry);
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+}
+
+function pressEnter(event) {
+  if (event.key === "Enter") {
+    saveScore();
+  }
+}
 
 initialsButton.addEventListener("click", function () {
-  localStorage.setItem(
-    "initalsData",
-    initialsEl.value + ": Your score is " + score
-  );
-  var initials = localStorage.getItem("initalsData");
-  final.push(initials);
+  saveScore();
 });
 
 //Shows initals and high score
 highscoresButton.addEventListener("click", function () {
   document.getElementById("clear").style.display = "";
-  scoresSection.textContent = final;
-  console.log(final);
+  scoresSection.textContent = localStorage.getItem("highscores");
   document.getElementById("clear").addEventListener("click", function () {
     localStorage.clear();
     scoresSection.textContent = "";
