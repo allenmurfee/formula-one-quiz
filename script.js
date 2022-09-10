@@ -1,10 +1,10 @@
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
 var intro = document.getElementById("intro");
-var submitButton = document.getElementById("submit");
-var nextButton = document.getElementById("next");
 var initialsButton = document.getElementById("initialsButton");
+var highscoresButton = document.getElementById("highscoresButton");
 var questionContainer = document.getElementById("question-container");
+var scoresSection = document.getElementById("scores");
 var initialsEl = document.getElementById("initials");
 var c1 = document.getElementById("c1");
 var c2 = document.getElementById("c2");
@@ -62,7 +62,7 @@ document.getElementById("initials").style.display = "none";
 document.getElementById("enter").style.display = "none";
 initialsButton.style.display = "none";
 
-var initials = localStorage.getItem("initials");
+// var initials = localStorage.getItem("initials");
 
 //Start Quiz
 function startQuiz() {
@@ -150,10 +150,16 @@ function enterData() {
   document.getElementById("initials").style.display = "";
 
   initialsButton.addEventListener("click", function () {
-    localStorage.setItem("initalsData", initialsEl.value);
+    localStorage.setItem(
+      "initalsData",
+      initialsEl.value + ": Your score is:" + score
+    );
   });
 }
 
 function showData() {
-  localStorage.getItem("initalsData");
+  var initials = localStorage.getItem("initalsData");
+  scoresSection.textContent = initials;
 }
+
+highscoresButton.addEventListener("click", showData);
