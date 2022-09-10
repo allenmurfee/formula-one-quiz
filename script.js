@@ -61,8 +61,7 @@ c4.style.display = "none";
 document.getElementById("initials").style.display = "none";
 document.getElementById("enter").style.display = "none";
 initialsButton.style.display = "none";
-
-// var initials = localStorage.getItem("initials");
+document.getElementById("clear").style.display = "none";
 
 //Start Quiz
 function startQuiz() {
@@ -152,14 +151,19 @@ function enterData() {
   initialsButton.addEventListener("click", function () {
     localStorage.setItem(
       "initalsData",
-      initialsEl.value + ": Your score is:" + score
+      initialsEl.value + ": Your score is" + score
     );
   });
 }
 
 function showData() {
+  document.getElementById("clear").style.display = "";
   var initials = localStorage.getItem("initalsData");
   scoresSection.textContent = initials;
+  document.getElementById("clear").addEventListener("click", function () {
+    localStorage.clear();
+    scoresSection.textContent = "";
+  });
 }
 
 highscoresButton.addEventListener("click", showData);
