@@ -4,6 +4,7 @@ var intro = document.getElementById("intro");
 var submitButton = document.getElementById("submit");
 var nextButton = document.getElementById("next");
 var questionContainer = document.getElementById("question-container");
+var initialsEl = document.getElementById("initials").value;
 var c1 = document.getElementById("c1");
 var c2 = document.getElementById("c2");
 var c3 = document.getElementById("c3");
@@ -56,6 +57,9 @@ c1.style.display = "none";
 c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
+document.getElementById("initials").style.display = "none";
+
+// var initials = localStorage.getItem("initials");
 
 //Start Quiz
 function startQuiz() {
@@ -127,7 +131,12 @@ function nextQ() {
 }
 
 function showResults() {
+  // event.preventDefault();
   intro.textContent = "Score:" + score;
   questionContainer.textContent = "";
   document.getElementById("result").textContent = "";
+  document.getElementById("initials").style.display = "";
+  localStorage.setItem("initials", initialsEl);
 }
+
+console.log(initialsEl)
