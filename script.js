@@ -141,34 +141,32 @@ function showResults() {
   intro.textContent = "Score:" + score;
   questionContainer.textContent = "";
   document.getElementById("result").textContent = "";
-  enterData();
-}
-
-//Function that stores initials in local storage
-function enterData() {
   document.getElementById("enter").style.display = "";
   initialsButton.style.display = "";
   document.getElementById("initials").style.display = "";
-
-  initialsButton.addEventListener("click", function () {
-    localStorage.setItem(
-      "initalsData",
-      initialsEl.value + ": Your score is" + score
-    );
-  });
 }
 
-//Function that shows initals and high score
-function showData() {
-  document.getElementById("clear").style.display = "";
+//Variable holds more than one localStorage value
+
+var final = [];
+
+initialsButton.addEventListener("click", function () {
+  localStorage.setItem(
+    "initalsData",
+    initialsEl.value + ": Your score is " + score
+  );
   var initials = localStorage.getItem("initalsData");
-  scoresSection.textContent = initials;
+  final.push(initials);
+});
+
+//Shows initals and high score
+highscoresButton.addEventListener("click", function () {
+  document.getElementById("clear").style.display = "";
+  scoresSection.textContent = final;
+  console.log(final);
   document.getElementById("clear").addEventListener("click", function () {
     localStorage.clear();
     scoresSection.textContent = "";
     document.getElementById("clear").style.display = "none";
   });
-}
-
-//Calls showData function on button click
-highscoresButton.addEventListener("click", showData);
+});
