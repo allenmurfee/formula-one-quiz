@@ -125,11 +125,6 @@ function nextQ() {
   }
 }
 
-//Doesn't reload page after initials form submission
-initialsButton.addEventListener("click", function (event) {
-  event.preventDefault();
-});
-
 //Funciton that shows score at the end of the quiz
 function showResults() {
   intro.textContent = "Score:" + score;
