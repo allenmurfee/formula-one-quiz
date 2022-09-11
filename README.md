@@ -10,11 +10,11 @@ This homework has definitely been the most difficult but beneficial assignment f
 
 ## Installation
 
-No installation necessary. Simply visit
+No installation necessary. Simply visit https://allenmurfee.github.io/formula-one-quiz/
 
 ## Usage
 
-To use this quiz, visit the deployed URL and then click "Start quiz." From there, simply answer the questions and your score will be displayed at the end. You can click "View highscores" to see previous scores, and "Clear highscores" to clear them all.
+To use this quiz, visit the deployed URL (https://allenmurfee.github.io/formula-one-quiz/) and then click "Start quiz." From there, simply answer the questions and your score will be displayed at the end. You can click "View highscores" to see previous scores, and "Clear highscores" to clear them all.
 
 ## Credits
 
