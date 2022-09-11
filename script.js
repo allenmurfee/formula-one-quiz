@@ -18,7 +18,6 @@ var qIndex = 0;
 //Quiz questions
 var questions = [
   {
-    // id: 0,
     q: "Which driver has won 7 world championships?",
     c: [
       "Lewis Hamilton",
@@ -29,25 +28,21 @@ var questions = [
     a: "Lewis Hamilton",
   },
   {
-    // id: 1,
     q: "What is the first name of legendary F1 driver Michael Schumacher's son who races for Haas in 2022?",
     c: ["Mick", "Mack", "Mitch", "Mark"],
     a: "Mick",
   },
   {
-    // id: 2,
     q: "In 2022, what manufacturer provides Red Bull's engine?",
     c: ["Ferrari", "Renault", "Mercedes", "Honda"],
     a: "Honda",
   },
   {
-    // id: 3,
     q: "Which team did Carlos Sainz drive for before Ferrari?",
     c: ["Racing Point", "Alpine", "McLaren", "Alfa Romeo"],
     a: "McLaren",
   },
   {
-    // id: 4,
     q: "Which of these F1 drivers is of Dutch descent?",
     c: ["Max Verstappen", "Lando Norris", "Valtteri Bottas", "Esteban Ocon"],
     a: "Max Verstappen",
@@ -76,7 +71,6 @@ function startQuiz() {
 
 //Starts quiz on click
 startButton.addEventListener("click", startQuiz);
-// questionContainer.addEventListener("click", idk)
 
 //Timer function
 function startTimer() {
@@ -146,7 +140,7 @@ function showResults() {
   document.getElementById("initials").style.display = "";
 }
 
-//Variable holds more than one localStorage value
+//Functions holds more than one localStorage value
 function saveScore() {
   var initials = initialsEl.value;
   var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
@@ -160,12 +154,14 @@ function saveScore() {
   localStorage.setItem("highscores", JSON.stringify(highscores));
 }
 
+//Saves initials submission on "enter" click
 function pressEnter(event) {
   if (event.key === "Enter") {
     saveScore();
   }
 }
 
+//Saves initials on button click
 initialsButton.addEventListener("click", function () {
   saveScore();
 });
